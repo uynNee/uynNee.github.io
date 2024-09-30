@@ -18,3 +18,49 @@ themeToggle.addEventListener('click', function () {
     themeToggle.textContent = '🌞';  // Change to sun emoji for dark theme
   }
 });
+
+document.querySelectorAll('.header-links a').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href').substring(1);
+    const targetElement = document.getElementById(targetId);
+    const headerOffset = document.querySelector('header').offsetHeight;
+    const elementPosition = targetElement.getBoundingClientRect().top;
+    const offsetPosition = elementPosition - headerOffset;
+
+    window.scrollBy({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+
+    // Update the URL hash manually
+    window.history.pushState(null, null, `#${targetId}`);
+  });
+});
+
+// Function to update the active link based on the current section in view
+const sections = document.querySelectorAll('section');
+const options = {
+  root: null,
+  rootMargin: `-${document.querySelector('header').offsetHeight}px 0px 0px 0px`,
+  threshold: 0.5
+};
+
+const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.getAttribute('id');
+      window.history.pushState(null, null, `#${id}`);
+      document.querySelectorAll('.header-links a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').substring(1) === id) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+}, options);
+
+sections.forEach(section => {
+  observer.observe(section);
+});
