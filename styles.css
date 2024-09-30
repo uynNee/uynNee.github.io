@@ -110,7 +110,7 @@ nav a:hover {
 }
 
 section {
-  padding: 35px 0;
+  padding: 35px 10px;
   text-align: center;
   border-bottom: 2px solid var(--border-bottom);
 }
@@ -214,13 +214,10 @@ li {
 
 .project a {
   display: inline-block;
-  margin-top: 15px;
+  margin-top: 25px;
   padding: 10px 20px;
   border-radius: 5px;
   font-weight: 600;
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
   transition: background-color 0.3s ease;
   background-color: var(--button-bg);
   color: var(--background-color);
@@ -259,6 +256,15 @@ footer {
 @media (max-width: 1024px) {
   #projects .project {
     width: calc(45% - 40px);
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  #projects .project {
+    width: 100%;
+    height: auto;
+    margin: 10px 0;
   }
 }
 
@@ -277,29 +283,27 @@ footer {
 
   p {
     font-size: 1em;
-  }
-
-  #projects .project {
-    width: 90%;
-    height: auto;
+    padding: 0 10px;
   }
 
   .project-description {
-    max-height: none;
+    padding-right: 5px;
   }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .header-links {
-    display: block;
-    text-align: center;
+    display: none; /* Hide header links */
   }
 
-  .header-links a {
-    display: block;
-    margin: 10px 0;
-    font-size: 1em;
+  .menu-icon {
+    display: block; /* Show menu icon */
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .header-title h1 {
+    font-size: 1.5em; /* Adjust text size for smaller screens */
   }
 }
 
@@ -364,4 +368,10 @@ body::-webkit-scrollbar-thumb:hover {
 
 .top-right:hover {
   background-color: var(--project-hover-bg);
+}
+
+@media (min-width: 769px) {
+  .menu-icon {
+    display: none; /* Hide menu icon */
+  }
 }

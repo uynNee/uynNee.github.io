@@ -64,3 +64,11 @@ const observer = new IntersectionObserver((entries, observer) => {
 sections.forEach(section => {
   observer.observe(section);
 });
+
+// Toggle the visibility of header links when the menu icon is clicked
+const menuIcon = document.querySelector('.menu-icon');
+const headerLinks = document.querySelector('.header-links');
+
+menuIcon.addEventListener('click', () => {
+  headerLinks.style.display = headerLinks.style.display === 'block' ? 'none' : 'block';
+});
