@@ -65,10 +65,24 @@ sections.forEach(section => {
   observer.observe(section);
 });
 
-// Toggle the visibility of header links when the menu icon is clicked
 const menuIcon = document.querySelector('.menu-icon');
 const headerLinks = document.querySelector('.header-links');
 
 menuIcon.addEventListener('click', () => {
   headerLinks.style.display = headerLinks.style.display === 'block' ? 'none' : 'block';
+});
+
+const header = document.querySelector('header');
+let lastScrollTop = 0;
+
+window.addEventListener('scroll', function() {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (currentScroll > lastScrollTop) {
+        header.classList.add('header-hidden');
+    } else {
+        header.classList.remove('header-hidden');
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
 });
